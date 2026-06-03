@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MySQL Database Schema</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+pre {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<h1>User Management Database Schema</h1>
+
+<h2>SQL Schema</h2>
+
+<pre>
+CREATE DATABASE user_management;
+
+USE user_management;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'editor', 'user') DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+</pre>
+
+<h2>Table Structure</h2>
+
+<table>
+    <tr>
+        <th>Column</th>
+        <th>Data Type</th>
+        <th>Description</th>
+    </tr>
+
+    <tr>
+        <td>id</td>
+        <td>INT</td>
+        <td>Primary Key, Auto Increment</td>
+    </tr>
+
+    <tr>
+        <td>name</td>
+        <td>VARCHAR(100)</td>
+        <td>User Name</td>
+    </tr>
+
+    <tr>
+        <td>email</td>
+        <td>VARCHAR(150)</td>
+        <td>Unique Email Address</td>
+    </tr>
+
+    <tr>
+        <td>password</td>
+        <td>VARCHAR(255)</td>
+        <td>Hashed Password</td>
+    </tr>
+
+    <tr>
+        <td>role</td>
+        <td>ENUM</td>
+        <td>User Role</td>
+    </tr>
+
+    <tr>
+        <td>created_at</td>
+        <td>TIMESTAMP</td>
+        <td>Account Creation Date</td>
+    </tr>
+</table>
+
+</body>
+</html>

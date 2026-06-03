@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Node.js Express API Dashboard</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+header {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+pre {
+    background: #eee;
+    padding: 15px;
+    overflow-x: auto;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Node.js Express API Dashboard</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Available Endpoints</h2>
+
+        <ul>
+            <li>GET /api/users</li>
+            <li>GET /api/users/:id</li>
+            <li>POST /api/users</li>
+            <li>PUT /api/users/:id</li>
+            <li>DELETE /api/users/:id</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Test API</h2>
+
+        <button onclick="loadUsers()">Get Users</button>
+
+        <h3>Response:</h3>
+        <pre id="output">Click button to load data...</pre>
+    </div>
+
+</div>
+
+<script>
+async function loadUsers() {
+    try {
+        const response = await fetch(
+            'http://localhost:3000/api/users'
+        );
+
+        const data = await response.json();
+
+        document.getElementById('output').textContent =
+            JSON.stringify(data, null, 2);
+
+    } catch (error) {
+        document.getElementById('output').textContent =
+            'Error: ' + error.message;
+    }
+}
+</script>
+
+</body>
+</html>

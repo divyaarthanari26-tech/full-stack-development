@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Role-Based Access Control</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+    background: #f5f5f5;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+select, button {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    color: #333;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Login Simulation</h2>
+
+        <label>Select Role:</label><br>
+
+        <select id="role">
+            <option value="user">User</option>
+            <option value="editor">Editor</option>
+            <option value="admin">Admin</option>
+        </select>
+
+        <br>
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="dashboard" class="card hidden">
+        <h2>Dashboard</h2>
+        <p id="welcome"></p>
+    </div>
+
+    <div id="userPanel" class="card hidden">
+        <h3>User Section</h3>
+        <p>View personal profile and account information.</p>
+    </div>
+
+    <div id="editorPanel" class="card hidden">
+        <h3>Editor Section</h3>
+        <p>Create, edit, and manage content.</p>
+    </div>
+
+    <div id="adminPanel" class="card hidden">
+        <h3>Admin Section</h3>
+        <p>Manage users, settings, and system administration.</p>
+    </div>
+
+</div>
+
+<script>
+function login() {
+
+    const role = document.getElementById("role").value;
+
+    document.getElementById("dashboard").classList.remove("hidden");
+    document.getElementById("userPanel").classList.add("hidden");
+    document.getElementById("editorPanel").classList.add("hidden");
+    document.getElementById("adminPanel").classList.add("hidden");
+
+    document.getElementById("welcome").innerText =
+        "Logged in as: " + role.toUpperCase();
+
+    if (role === "user") {
+        document.getElementById("userPanel")
+            .classList.remove("hidden");
+    }
+
+    if (role === "editor") {
+        document.getElementById("userPanel")
+            .classList.remove("hidden");
+
+        document.getElementById("editorPanel")
+            .classList.remove("hidden");
+    }
+
+    if (role === "admin") {
+        document.getElementById("userPanel")
+            .classList.remove("hidden");
+
+        document.getElementById("editorPanel")
+            .classList.remove("hidden");
+
+        document.getElementById("adminPanel")
+            .classList.remove("hidden");
+    }
+}
+</script>
+
+</body>
+</html>
