@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontend Routing Demo</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+nav{
+    background:#333;
+    padding:15px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-right:20px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#00bfff;
+}
+
+#app{
+    padding:30px;
+}
+
+.page{
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div id="app"></div>
+
+<script>
+const routes = {
+    home: `
+        <div class="page">
+            <h1>Home Page</h1>
+            <p>Welcome to our website.</p>
+        </div>
+    `,
+    about: `
+        <div class="page">
+            <h1>About Us</h1>
+            <p>Learn more about our company.</p>
+        </div>
+    `,
+    services: `
+        <div class="page">
+            <h1>Services</h1>
+            <p>Explore our services and solutions.</p>
+        </div>
+    `,
+    contact: `
+        <div class="page">
+            <h1>Contact Us</h1>
+            <p>Email: info@example.com</p>
+        </div>
+    `
+};
+
+function renderPage() {
+    const hash = window.location.hash.replace('#', '') || 'home';
+    const app = document.getElementById('app');
+
+    app.innerHTML = routes[hash] || `
+        <div class="page">
+            <h1>404</h1>
+            <p>Page Not Found</p>
+        </div>
+    `;
+}
+
+window.addEventListener('hashchange', renderPage);
+window.addEventListener('load', renderPage);
+</script>
+
+</body>
+</html>

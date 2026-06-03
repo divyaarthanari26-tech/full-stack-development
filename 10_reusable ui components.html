@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reusable UI Components</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:30px;
+}
+
+/* Container */
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+/* Navbar */
+.navbar{
+    background:#2563eb;
+    color:#fff;
+    padding:15px 25px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.navbar h2{
+    display:inline-block;
+}
+
+/* Buttons */
+.btn{
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+    margin:5px;
+}
+
+.btn-primary{
+    background:#2563eb;
+}
+
+.btn-success{
+    background:#16a34a;
+}
+
+.btn-danger{
+    background:#dc2626;
+}
+
+/* Card */
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    margin:20px 0;
+}
+
+/* Input */
+.input-group{
+    margin:15px 0;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+}
+
+.input-group input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+/* Alert */
+.alert{
+    padding:15px;
+    border-radius:6px;
+    margin:15px 0;
+    color:white;
+}
+
+.alert-success{
+    background:#16a34a;
+}
+
+.alert-warning{
+    background:#f59e0b;
+}
+
+.alert-danger{
+    background:#dc2626;
+}
+
+/* Modal */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+}
+
+.modal-content{
+    background:white;
+    width:90%;
+    max-width:400px;
+    margin:120px auto;
+    padding:20px;
+    border-radius:10px;
+}
+
+.close{
+    float:right;
+    cursor:pointer;
+    font-size:22px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>UI Component Library</h2>
+    </div>
+
+    <!-- Buttons -->
+    <div class="card">
+        <h3>Buttons</h3>
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+    </div>
+
+    <!-- Form Input -->
+    <div class="card">
+        <h3>Input Field</h3>
+        <div class="input-group">
+            <label>Name</label>
+            <input type="text" placeholder="Enter your name">
+        </div>
+    </div>
+
+    <!-- Alerts -->
+    <div class="card">
+        <h3>Alerts</h3>
+        <div class="alert alert-success">
+            Success! Operation completed.
+        </div>
+
+        <div class="alert alert-warning">
+            Warning! Check your input.
+        </div>
+
+        <div class="alert alert-danger">
+            Error! Something went wrong.
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="card">
+        <h3>Modal Component</h3>
+        <button class="btn btn-primary" onclick="openModal()">
+            Open Modal
+        </button>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Modal Title</h2>
+        <p>This is a reusable modal component.</p>
+    </div>
+</div>
+
+<script>
+function openModal(){
+    document.getElementById("modal").style.display = "block";
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
+}
+
+window.onclick = function(event){
+    let modal = document.getElementById("modal");
+    if(event.target === modal){
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

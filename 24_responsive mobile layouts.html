@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Mobile Layout</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+}
+
+/* Header */
+.header {
+    background: #007bff;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+/* Navigation */
+.navbar {
+    background: #333;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li {
+    margin: 0;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+}
+
+.navbar a:hover {
+    background: #555;
+}
+
+/* Main Layout */
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.sidebar {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.content {
+    flex: 3;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    background: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* Footer */
+.footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+/* Tablet Layout */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+    }
+}
+
+/* Mobile Layout */
+@media (max-width: 480px) {
+
+    .navbar ul {
+        flex-direction: column;
+    }
+
+    .navbar a {
+        text-align: center;
+        border-bottom: 1px solid #444;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        font-size: 18px;
+    }
+
+    .content,
+    .sidebar {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <h1>Responsive Mobile Layout</h1>
+</header>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <aside class="sidebar">
+        <h2>Sidebar</h2>
+        <p>
+            This sidebar moves above the content
+            on smaller screens.
+        </p>
+    </aside>
+
+    <main class="content">
+        <h2>Main Content</h2>
+        <p>
+            This layout automatically adjusts for
+            desktop, tablet, and mobile devices.
+        </p>
+
+        <div class="cards">
+            <div class="card">Card 1</div>
+            <div class="card">Card 2</div>
+            <div class="card">Card 3</div>
+            <div class="card">Card 4</div>
+            <div class="card">Card 5</div>
+            <div class="card">Card 6</div>
+        </div>
+    </main>
+
+</div>
+
+<footer class="footer">
+    <p>&copy; 2026 Responsive Website</p>
+</footer>
+
+</body>
+</html>

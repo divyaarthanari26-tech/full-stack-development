@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Animations Demo</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Bouncing Ball */
+.ball {
+    width: 80px;
+    height: 80px;
+    background: #3498db;
+    border-radius: 50%;
+    margin: 30px auto;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-120px);
+    }
+}
+
+/* Rotating Box */
+.box {
+    width: 100px;
+    height: 100px;
+    background: #e74c3c;
+    margin: 50px auto;
+    animation: rotateBox 3s linear infinite;
+}
+
+@keyframes rotateBox {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sliding Text */
+.slide-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    animation: slideIn 2s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-300px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animated Button */
+.btn {
+    margin-top: 30px;
+    padding: 12px 25px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+</style>
+</head>
+<body>
+
+<h1 class="slide-text">CSS Animation Examples</h1>
+
+<div class="ball"></div>
+
+<div class="box"></div>
+
+<button class="btn">Animated Button</button>
+
+</body>
+</html>
