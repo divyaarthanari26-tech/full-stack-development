@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notification System</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.notification {
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.success {
+    background: #28a745;
+}
+
+.warning {
+    background: #ffc107;
+    color: #000;
+}
+
+.error {
+    background: #dc3545;
+}
+</style>
+</head>
+<body>
+
+<h1>Notification API Demo</h1>
+
+<button onclick="showNotification('success')">
+    Success Notification
+</button>
+
+<button onclick="showNotification('warning')">
+    Warning Notification
+</button>
+
+<button onclick="showNotification('error')">
+    Error Notification
+</button>
+
+<div id="notifications"></div>
+
+<script>
+function showNotification(type) {
+
+    const container =
+        document.getElementById("notifications");
+
+    const notification =
+        document.createElement("div");
+
+    notification.classList.add(
+        "notification",
+        type
+    );
+
+    const messages = {
+        success: "Operation completed successfully.",
+        warning: "Please check your input.",
+        error: "Something went wrong."
+    };
+
+    notification.textContent =
+        messages[type];
+
+    container.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 4000);
+}
+
+// Example API Call
+async function fetchNotifications() {
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:3000/api/notifications"
+        );
+
+        const data = await response.json();
+
+        console.log(data);
+
+    } catch(error) {
+        console.error(error);
+    }
+}
+</script>
+
+</body>
+</html>

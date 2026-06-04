@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Middleware Demo</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+pre {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+</style>
+</head>
+<body>
+
+<h1>API Middleware Example</h1>
+
+<button onclick="callAPI()">Call API</button>
+
+<h3>Response</h3>
+<pre id="output">Click the button to call the API...</pre>
+
+<script>
+// Client-side request interceptor (middleware-like behavior)
+async function apiRequest(url, options = {}) {
+
+    // Middleware: Add custom headers
+    options.headers = {
+        ...options.headers,
+        "Content-Type": "application/json",
+        "Authorization": "Bearer demo-token"
+    };
+
+    console.log("Request Middleware Executed");
+
+    const response = await fetch(url, options);
+
+    const data = await response.json();
+
+    console.log("Response Middleware Executed");
+
+    return data;
+}
+
+async function callAPI() {
+    try {
+        const data = await apiRequest(
+            "https://jsonplaceholder.typicode.com/users"
+        );
+
+        document.getElementById("output").textContent =
+            JSON.stringify(data, null, 2);
+
+    } catch(error) {
+        document.getElementById("output").textContent =
+            error.message;
+    }
+}
+</script>
+
+</body>
+</html>

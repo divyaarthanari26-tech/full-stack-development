@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Verification</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.container{
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    background: #0056b3;
+}
+
+#message{
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Email Verification</h2>
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        required
+    >
+
+    <button onclick="sendVerificationEmail()">
+        Send Verification Email
+    </button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+async function sendVerificationEmail() {
+
+    const email =
+        document.getElementById("email").value;
+
+    if (!email) {
+        document.getElementById("message").innerText =
+            "Please enter an email address.";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:3000/api/send-verification",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email })
+            }
+        );
+
+        const data = await response.json();
+
+        document.getElementById("message").innerText =
+            data.message;
+
+    } catch(error) {
+
+        document.getElementById("message").innerText =
+            "Error: " + error.message;
+    }
+}
+</script>
+
+</body>
+</html>

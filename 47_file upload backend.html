@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Upload</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.upload-box {
+    border: 2px dashed #007bff;
+    padding: 30px;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
+input[type="file"] {
+    margin: 20px 0;
+}
+
+button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#preview {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2>File Upload System</h2>
+
+<div class="upload-box">
+    <input type="file" id="fileInput">
+
+    <br>
+
+    <button onclick="uploadFile()">
+        Upload File
+    </button>
+
+    <div id="preview"></div>
+</div>
+
+<script>
+function uploadFile() {
+
+    const fileInput =
+        document.getElementById("fileInput");
+
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please select a file.");
+        return;
+    }
+
+    const preview =
+        document.getElementById("preview");
+
+    preview.innerHTML = `
+        <p><strong>File Name:</strong>
+        ${file.name}</p>
+
+        <p><strong>File Size:</strong>
+        ${(file.size / 1024).toFixed(2)} KB</p>
+
+        <p><strong>File Type:</strong>
+        ${file.type}</p>
+    `;
+
+    // Preview image files
+    if (file.type.startsWith("image/")) {
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.innerHTML += `
+                <img src="${e.target.result}"
+                     alt="Preview">
+            `;
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    // Example upload to backend
+    /*
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("http://localhost:3000/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+    */
+}
+</script>
+
+</body>
+</html>
