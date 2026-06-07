@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stripe Payment</title>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+.container{
+    width:400px;
+    margin:50px auto;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input, button{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+}
+
+button{
+    background:#635bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Stripe Payment</h2>
+
+    <input type="number"
+           id="amount"
+           placeholder="Enter Amount">
+
+    <button onclick="createPayment()">
+        Pay Now
+    </button>
+
+</div>
+
+<script>
+
+async function createPayment(){
+
+    const amount =
+        document.getElementById("amount").value;
+
+    const response = await fetch(
+        "/api/create-payment-intent",
+        {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                amount: amount
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    alert(
+      "Client Secret Received: "
+      + data.clientSecret
+    );
+
+}
+
+</script>
+
+</body>
+</html>

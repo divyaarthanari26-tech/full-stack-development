@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Export Example</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    padding:20px;
+    background:#f4f4f4;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+button{
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.invoice{
+    margin-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="invoice" id="invoice">
+
+        <h2>Invoice</h2>
+
+        <p><strong>Invoice No:</strong> INV-1001</p>
+        <p><strong>Customer:</strong> John Doe</p>
+        <p><strong>Date:</strong> 04-06-2026</p>
+
+        <hr>
+
+        <p>Product: Laptop</p>
+        <p>Quantity: 1</p>
+        <p>Price: ₹50,000</p>
+
+        <hr>
+
+        <h3>Total: ₹50,000</h3>
+
+    </div>
+
+    <button onclick="downloadPDF()">
+        Export PDF
+    </button>
+
+</div>
+
+<!-- jsPDF Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+async function downloadPDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF();
+
+    pdf.setFontSize(18);
+    pdf.text("Invoice", 20, 20);
+
+    pdf.setFontSize(12);
+    pdf.text("Invoice No: INV-1001", 20, 40);
+    pdf.text("Customer: John Doe", 20, 50);
+    pdf.text("Date: 04-06-2026", 20, 60);
+
+    pdf.text("Product: Laptop", 20, 80);
+    pdf.text("Quantity: 1", 20, 90);
+    pdf.text("Price: Rs. 50,000", 20, 100);
+
+    pdf.setFontSize(14);
+    pdf.text("Total: Rs. 50,000", 20, 120);
+
+    pdf.save("invoice.pdf");
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Generation System</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+}
+
+select,input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    padding:12px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+#reportOutput{
+    margin-top:20px;
+    padding:15px;
+    background:#f8f9fa;
+    border-radius:5px;
+    white-space:pre-wrap;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Report Generation Dashboard</h2>
+
+    <select id="reportType">
+        <option value="sales">Sales Report</option>
+        <option value="users">User Report</option>
+        <option value="orders">Order Report</option>
+        <option value="revenue">Revenue Report</option>
+    </select>
+
+    <input type="date" id="startDate">
+
+    <input type="date" id="endDate">
+
+    <button onclick="generateReport()">
+        Generate Report
+    </button>
+
+    <div id="reportOutput"></div>
+
+</div>
+
+<script>
+
+async function generateReport(){
+
+    const reportType =
+        document.getElementById("reportType").value;
+
+    const startDate =
+        document.getElementById("startDate").value;
+
+    const endDate =
+        document.getElementById("endDate").value;
+
+    try{
+
+        const response = await fetch(
+            "/api/reports/generate",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    reportType,
+                    startDate,
+                    endDate
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        document.getElementById("reportOutput")
+            .innerText =
+            JSON.stringify(data, null, 2);
+
+    }
+    catch(error){
+
+        document.getElementById("reportOutput")
+            .innerText =
+            "Error generating report";
+
+        console.error(error);
+    }
+}
+
+</script>
+
+</body>
+</html>
