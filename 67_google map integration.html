@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Integration</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Google Maps Example</h2>
+
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+
+            const location = {
+                lat: 9.9252,
+                lng: 78.1198
+            };
+
+            const map = new google.maps.Map(
+                document.getElementById("map"),
+                {
+                    zoom: 13,
+                    center: location
+                }
+            );
+
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: "Madurai"
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: "<h3>Madurai</h3><p>Welcome to Madurai!</p>"
+            });
+
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+            });
+        }
+    </script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+        async
+        defer>
+    </script>
+
+</body>
+</html>

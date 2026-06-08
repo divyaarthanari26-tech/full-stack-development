@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>URL Shortener</h2>
+
+<input
+    type="url"
+    id="longUrl"
+    placeholder="Enter long URL"
+>
+
+<button onclick="shortenUrl()">
+    Shorten URL
+</button>
+
+<div id="result"></div>
+
+<script>
+async function shortenUrl() {
+
+    const longUrl =
+        document.getElementById("longUrl").value;
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:3000/api/shorten",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    url: longUrl
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        document.getElementById("result").innerHTML =
+            `Short URL:
+             <a href="${data.shortUrl}" target="_blank">
+                ${data.shortUrl}
+             </a>`;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+</script>
+
+</body>
+</html>

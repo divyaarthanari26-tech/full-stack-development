@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redis Cache Demo</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    padding:20px;
+}
+
+.container{
+    max-width:600px;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+button{
+    padding:10px 20px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    background:#e9ecef;
+    border-radius:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Redis Caching Simulation</h2>
+
+    <p>
+        Click the button to fetch data.
+        First request comes from "Database".
+        Subsequent requests come from "Redis Cache".
+    </p>
+
+    <button onclick="getData()">Fetch Data</button>
+
+    <div class="result" id="output">
+        No data loaded.
+    </div>
+</div>
+
+<script>
+let redisCache = null;
+
+function getData() {
+
+    const output = document.getElementById("output");
+
+    if(redisCache){
+        output.innerHTML = `
+            <h3>Source: Redis Cache</h3>
+            <p>${redisCache}</p>
+        `;
+    } else {
+
+        const databaseData =
+            "User profile data loaded from database.";
+
+        redisCache = databaseData;
+
+        output.innerHTML = `
+            <h3>Source: Database</h3>
+            <p>${databaseData}</p>
+        `;
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagination Example</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    #data-container {
+        margin-bottom: 20px;
+    }
+
+    .item {
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .pagination {
+        display: flex;
+        gap: 5px;
+    }
+
+    .pagination button {
+        padding: 8px 12px;
+        border: 1px solid #007bff;
+        background: white;
+        color: #007bff;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .pagination button.active {
+        background: #007bff;
+        color: white;
+    }
+
+    .pagination button:hover {
+        background: #0056b3;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<h2>Pagination System</h2>
+
+<div id="data-container"></div>
+
+<div class="pagination" id="pagination"></div>
+
+<script>
+    // Sample data
+    const items = [];
+
+    for (let i = 1; i <= 50; i++) {
+        items.push("Product " + i);
+    }
+
+    const itemsPerPage = 5;
+    let currentPage = 1;
+
+    function displayItems(page) {
+        const container = document.getElementById("data-container");
+        container.innerHTML = "";
+
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        const paginatedItems = items.slice(start, end);
+
+        paginatedItems.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "item";
+            div.textContent = item;
+            container.appendChild(div);
+        });
+    }
+
+    function setupPagination() {
+        const pageCount = Math.ceil(items.length / itemsPerPage);
+        const pagination = document.getElementById("pagination");
+
+        pagination.innerHTML = "";
+
+        for (let i = 1; i <= pageCount; i++) {
+            const button = document.createElement("button");
+            button.innerText = i;
+
+            if (i === currentPage) {
+                button.classList.add("active");
+            }
+
+            button.addEventListener("click", () => {
+                currentPage = i;
+                displayItems(currentPage);
+                setupPagination();
+            });
+
+            pagination.appendChild(button);
+        }
+    }
+
+    displayItems(currentPage);
+    setupPagination();
+</script>
+
+</body>
+</html>

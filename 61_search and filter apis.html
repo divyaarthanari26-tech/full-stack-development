@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search and Filter API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        .result {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Search & Filter Products</h2>
+
+    <input type="text" id="search" placeholder="Search products">
+
+    <select id="category">
+        <option value="">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="books">Books</option>
+    </select>
+
+    <button onclick="searchProducts()">Search</button>
+
+    <div id="results"></div>
+
+    <script>
+        async function searchProducts() {
+            const search = document.getElementById("search").value;
+            const category = document.getElementById("category").value;
+
+            const apiUrl =
+                `https://api.example.com/products?search=${search}&category=${category}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                let output = "";
+
+                data.forEach(product => {
+                    output += `
+                        <div class="result">
+                            <h3>${product.name}</h3>
+                            <p>Category: ${product.category}</p>
+                            <p>Price: ₹${product.price}</p>
+                        </div>
+                    `;
+                });
+
+                document.getElementById("results").innerHTML = output;
+            } catch (error) {
+                document.getElementById("results").innerHTML =
+                    "<p>Error loading data.</p>";
+                console.error(error);
+            }
+        }
+    </script>
+
+</body>
+</html>
