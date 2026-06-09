@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Microservices Architecture Demo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .service {
+        background: white;
+        border: 2px solid #007bff;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 15px 0;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .gateway {
+        border-color: #28a745;
+    }
+
+    .database {
+        border-color: #dc3545;
+    }
+
+    .arrow {
+        text-align: center;
+        font-size: 30px;
+        margin: 10px 0;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #output {
+        margin-top: 20px;
+        padding: 15px;
+        background: white;
+        border-radius: 5px;
+        min-height: 50px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Microservices Architecture Demo</h1>
+
+    <div class="service gateway">
+        <h2>API Gateway</h2>
+        <p>Routes requests to microservices.</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="service">
+        <h2>User Service</h2>
+        <p>Handles user management.</p>
+    </div>
+
+    <div class="service">
+        <h2>Product Service</h2>
+        <p>Handles product catalog.</p>
+    </div>
+
+    <div class="service">
+        <h2>Order Service</h2>
+        <p>Handles customer orders.</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="service database">
+        <h2>Independent Databases</h2>
+        <p>Each service owns its own database.</p>
+    </div>
+
+    <button onclick="simulateRequest()">
+        Simulate API Request
+    </button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+function simulateRequest() {
+    const output = document.getElementById("output");
+
+    output.innerHTML = `
+        <strong>Request Flow:</strong><br>
+        Client → API Gateway → User Service<br>
+        User Service → Database<br>
+        Response returned successfully.
+    `;
+}
+</script>
+
+</body>
+</html>

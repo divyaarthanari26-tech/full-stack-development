@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Integration</title>
+</head>
+<body>
+
+    <h2>Firebase Integration Example</h2>
+
+    <form id="userForm">
+        <input type="text" id="name" placeholder="Enter Name" required>
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <button type="submit">Save</button>
+    </form>
+
+    <h3>Saved Users</h3>
+    <ul id="userList"></ul>
+
+    <script type="module">
+        // Import Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import {
+            getDatabase,
+            ref,
+            push,
+            onValue
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        // Replace with your Firebase project configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Form Submit
+        document.getElementById("userForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            push(ref(database, "users"), {
+                name: name,
+                email: email
+            });
+
+            document.getElementById("userForm").reset();
+            alert("User saved successfully!");
+        });
+
+        // Display Users
+        const usersRef = ref(database, "users");
+
+        onValue(usersRef, (snapshot) => {
+            const userList = document.getElementById("userList");
+            userList.innerHTML = "";
+
+            snapshot.forEach((childSnapshot) => {
+                const user = childSnapshot.val();
+
+                const li = document.createElement("li");
+                li.textContent = `${user.name} - ${user.email}`;
+                userList.appendChild(li);
+            });
+        });
+    </script>
+
+</body>
+</html>

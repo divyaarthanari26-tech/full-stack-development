@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scalable Architecture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .layer {
+            border: 2px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            text-align: center;
+            background: #ecf5ff;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #555;
+        }
+
+        ul {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Scalable Web Application Architecture</h1>
+
+    <div class="layer">
+        <h2>Client Layer</h2>
+        <p>HTML, CSS, JavaScript, Mobile Apps</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="layer">
+        <h2>CDN Layer</h2>
+        <p>CloudFront / CDN for Static Content Delivery</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="layer">
+        <h2>Load Balancer</h2>
+        <p>Distributes traffic across multiple servers</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="layer">
+        <h2>Application Servers</h2>
+        <ul>
+            <li>Node.js</li>
+            <li>Java Spring Boot</li>
+            <li>Python Django</li>
+            <li>.NET Core</li>
+        </ul>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="layer">
+        <h2>Caching Layer</h2>
+        <p>Redis / Memcached</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="layer">
+        <h2>Database Layer</h2>
+        <ul>
+            <li>MySQL/PostgreSQL (Primary)</li>
+            <li>Read Replicas</li>
+            <li>MongoDB for NoSQL Data</li>
+        </ul>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="layer">
+        <h2>Storage Layer</h2>
+        <p>AWS S3 / Azure Blob Storage</p>
+    </div>
+
+    <div class="arrow">↓</div>
+
+    <div class="layer">
+        <h2>Monitoring & Logging</h2>
+        <p>Prometheus, Grafana, ELK Stack, CloudWatch</p>
+    </div>
+</div>
+
+</body>
+</html>

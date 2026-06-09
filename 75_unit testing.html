@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Testing Demo</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .pass {
+        color: green;
+        font-weight: bold;
+    }
+
+    .fail {
+        color: red;
+        font-weight: bold;
+    }
+
+    #results {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h2>JavaScript Unit Testing Demo</h2>
+
+<button onclick="runTests()">Run Tests</button>
+
+<div id="results"></div>
+
+<script>
+// Functions to test
+function add(a, b) {
+    return a + b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+// Simple assertion function
+function assertEqual(actual, expected, testName) {
+    const resultDiv = document.getElementById("results");
+
+    if (actual === expected) {
+        resultDiv.innerHTML +=
+            `<p class="pass">✔ ${testName} Passed</p>`;
+    } else {
+        resultDiv.innerHTML +=
+            `<p class="fail">✘ ${testName} Failed
+             (Expected: ${expected}, Got: ${actual})</p>`;
+    }
+}
+
+// Run all tests
+function runTests() {
+
+    document.getElementById("results").innerHTML = "";
+
+    assertEqual(add(2, 3), 5, "Addition Test 1");
+    assertEqual(add(-1, 1), 0, "Addition Test 2");
+
+    assertEqual(multiply(4, 5), 20, "Multiplication Test 1");
+    assertEqual(multiply(3, 0), 0, "Multiplication Test 2");
+}
+</script>
+
+</body>
+</html>

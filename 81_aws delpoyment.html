@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Deployment Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #232F3E;
+        }
+        .step {
+            background: #eef3f8;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #FF9900;
+        }
+        code {
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        button {
+            background: #FF9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #e68900;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AWS Deployment Process</h1>
+
+    <div class="step">
+        <h3>Step 1: Create AWS Account</h3>
+        <p>Sign up and log in to AWS Management Console.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 2: Launch EC2 Instance</h3>
+        <p>Create an EC2 instance using Amazon Linux or Ubuntu.</p>
+    </div>
+
+    <div class="step">
+        <h3>Step 3: Connect to Server</h3>
+        <p>Use SSH to connect:</p>
+        <code>ssh -i mykey.pem ec2-user@your-public-ip</code>
+    </div>
+
+    <div class="step">
+        <h3>Step 4: Install Web Server</h3>
+        <code>
+            sudo yum update -y <br>
+            sudo yum install httpd -y <br>
+            sudo systemctl start httpd
+        </code>
+    </div>
+
+    <div class="step">
+        <h3>Step 5: Upload Website Files</h3>
+        <p>Copy HTML files to:</p>
+        <code>/var/www/html/</code>
+    </div>
+
+    <div class="step">
+        <h3>Step 6: Access Website</h3>
+        <p>Open your EC2 public IP address in a browser.</p>
+    </div>
+
+    <button onclick="showMessage()">Deployment Complete</button>
+    <p id="result"></p>
+</div>
+
+<script>
+function showMessage() {
+    document.getElementById("result").innerHTML =
+        "Your HTML application is ready for deployment on AWS!";
+}
+</script>
+
+</body>
+</html>

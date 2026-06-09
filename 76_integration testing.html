@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integration Testing Demo</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .success {
+        color: green;
+        font-weight: bold;
+    }
+
+    .error {
+        color: red;
+        font-weight: bold;
+    }
+
+    input, button {
+        padding: 8px;
+        margin: 5px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Integration Testing Demo</h2>
+
+<input type="number" id="price" placeholder="Price">
+<input type="number" id="quantity" placeholder="Quantity">
+<button onclick="runIntegrationTest()">Run Test</button>
+
+<div id="output"></div>
+
+<script>
+// Component 1: Calculate total
+function calculateTotal(price, quantity) {
+    return price * quantity;
+}
+
+// Component 2: Format currency
+function formatCurrency(amount) {
+    return "$" + amount.toFixed(2);
+}
+
+// Component 3: Display result
+function displayResult(result) {
+    document.getElementById("output").innerHTML = result;
+}
+
+// Integration Test
+function integrationTest() {
+    const total = calculateTotal(100, 2);
+    const formatted = formatCurrency(total);
+
+    return formatted === "$200.00";
+}
+
+// Execute Test
+function runIntegrationTest() {
+    const testPassed = integrationTest();
+
+    if (testPassed) {
+        displayResult(
+            '<p class="success">✔ Integration Test Passed</p>'
+        );
+    } else {
+        displayResult(
+            '<p class="error">✘ Integration Test Failed</p>'
+        );
+    }
+}
+</script>
+
+</body>
+</html>
